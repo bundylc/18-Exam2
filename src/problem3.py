@@ -5,8 +5,8 @@ This module contains:
   -- Methods you must implement for the Cloud object
   
 Authors: David Mutchler, Dave Fisher, Matt Boutell, their colleagues,
-         and PUT_YOUR_NAME_HERE.  October 2018.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Landon Bundy.  October 2018.
+"""  # TODdO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import time
 from numbers import Number
@@ -25,10 +25,10 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_init()
-    # run_test_rain()
-    # run_test_get_total_rain_amount()
-    # run_test_merge_cloud()
+    run_test_init()
+    run_test_rain()
+    run_test_get_total_rain_amount()
+    run_test_merge_cloud()
 
 
 ###############################################################################
@@ -45,6 +45,12 @@ class Cloud(object):
     """
 
     def __init__(self, capacity, water):
+        self.capacity = capacity
+        self.water = water
+        if self.water > self.capacity:
+            self.water = self.capacity
+        self.water2 = water
+
         """
         What comes in:
           -- capacity, a number representing the maximum amount of water
@@ -69,18 +75,26 @@ class Cloud(object):
           cloud2 = Cloud(10, 35)
             #   cloud2.capacity  is now 10
             #   cloud2.water     is now 10
-            # Notice that the water is capped to the max capacity in this case
+            # Notice that 
+            the water is capped to the max capacity in this case
 
         Type hints:
           :type capacity: int | float
           :type water: int | float
         """
         # ---------------------------------------------------------------------
-        # TODO: 2. Implement and test this method.
+        # TODOd: 2. Implement and test this method.
         # ---------------------------------------------------------------------
 
     def rain(self, rain_amount):
-        """
+        if rain_amount > self.water:
+            rain_amount = self.water
+            self.water = 0
+        else:
+            self.water = self.water - rain_amount
+        return rain_amount
+
+    """
         What comes in:
           -- self
           -- a number   rain_amount   that specifies how much it "rains",
@@ -121,13 +135,16 @@ class Cloud(object):
           :type  rain_amount: int | float
           :rtype: int | float
         """
-        # ---------------------------------------------------------------------
-        # TODO: 3. Implement and test this method.
-        # ---------------------------------------------------------------------
 
+    # ---------------------------------------------------------------------
+    # TODdO: 3. Implement and test this method.
+    # ---------------------------------------------------------------------
 
     def get_total_rain_amount(self):
-        """
+        rain = self.water2 - self.water
+        return rain
+
+    """
         What comes in:
           -- self
         What goes out:
@@ -155,12 +172,17 @@ class Cloud(object):
         Type hints:
           :rtype: int | float
         """
-        # ---------------------------------------------------------------------
-        # TODO: 4. Implement and test this method.
-        # ---------------------------------------------------------------------
 
+    # ---------------------------------------------------------------------
+    # TOdDO: 4. Implement and test this method.
+    # ---------------------------------------------------------------------
 
     def merge_cloud(self, another_cloud):
+        self.water = self.water + another_cloud.water
+        another_cloud.water = 0
+        self.capacity = self.capacity + another_cloud.capacity
+        another_cloud.capacity = 0
+
         """
         What comes in:
           -- self
@@ -392,9 +414,9 @@ def run_test_values_of_instance_variables(cloud, expected_capacity, expected_wat
 def something_unexpected_happened_in_our_testing_code():
     print_failure_message()
     explanation = (
-        '  Something unexpected has happened in the testing \n' +
-        '  code that we supplied.  You should probably\n' +
-        '  SEEK HELP FROM YOUR INSTRUCTOR NOW.')
+            '  Something unexpected has happened in the testing \n' +
+            '  code that we supplied.  You should probably\n' +
+            '  SEEK HELP FROM YOUR INSTRUCTOR NOW.')
     print_failure_message(explanation)
 
 
@@ -425,15 +447,15 @@ def run_test_types_of_instance_variables(cloud):
     if ('capacity' not in attributes
             and 'water' not in attributes):
         explanation = (
-            '  This object:\n' +
-            '     ' + str(cloud) + '\n' +
-            '  should have these instance variables:\n' +
-            '     capacity\n' +
-            '     water\n' +
-            '  but it has NONE of them.\n' +
-            '  Perhaps you simply have not yet\n' +
-            '  implemented the   __init__   method?\n' +
-            '  (If so, implement it now.)')
+                '  This object:\n' +
+                '     ' + str(cloud) + '\n' +
+                '  should have these instance variables:\n' +
+                '     capacity\n' +
+                '     water\n' +
+                '  but it has NONE of them.\n' +
+                '  Perhaps you simply have not yet\n' +
+                '  implemented the   __init__   method?\n' +
+                '  (If so, implement it now.)')
         print_failure_message()
         print_failure_message(explanation)
         return False
@@ -443,51 +465,51 @@ def run_test_types_of_instance_variables(cloud):
     if not ('capacity' in attributes
             and 'water' in attributes):
         explanation = (
-            '  This object:\n' +
-            '     ' + str(cloud) + '\n' +
-            '  should have these instance variables:\n' +
-            '     capacity\n' +
-            '     water\n' +
-            '  but it is missing some of them.\n' +
-            '  Perhaps you misspelled something\n' +
-            '  in your   __init__   code?')
+                '  This object:\n' +
+                '     ' + str(cloud) + '\n' +
+                '  should have these instance variables:\n' +
+                '     capacity\n' +
+                '     water\n' +
+                '  but it is missing some of them.\n' +
+                '  Perhaps you misspelled something\n' +
+                '  in your   __init__   code?')
         print_failure_message()
         print_failure_message(explanation)
         return False
 
     # Check that the instance variables are of the right types:
-#     if not isinstance(cloud.capacity, str):
-#         explanation = (
-#             '  This object:\n' +
-#             '     ' + str(cloud) + '\n' +
-#             '  has an instance variable  capacity  with this value:\n' +
-#             '     capacity: ' + str(cloud.capacity) +
-#             '  That value should be a STRING, but is isn\'t.\n')
-#         print_failure_message()
-#         print_failure_message(explanation)
-#         return False
-#
-#     if not isinstance(cloud.water, list):
-#         explanation = (
-#             '  This object:\n' +
-#             '     ' + str(cloud) + '\n' +
-#             '  has an instance variable  water  with this value:\n' +
-#             '     water: ' + str(cloud.water) +
-#             '  That value should be a LIST, but is isn\'t.\n')
-#         print_failure_message()
-#         print_failure_message(explanation)
-#         return False
-#
-#     if not is_list_of_strings(cloud.water):
-#         explanation = (
-#             '  This object:\n' +
-#             '     ' + str(cloud) + '\n' +
-#             '  has an instance variable  water  with this value:\n' +
-#             '     water: ' + str(cloud.water) +
-#             '  That value should be a list of STRINGS, but is isn\'t.\n')
-#         print_failure_message()
-#         print_failure_message(explanation)
-#         return False
+    #     if not isinstance(cloud.capacity, str):
+    #         explanation = (
+    #             '  This object:\n' +
+    #             '     ' + str(cloud) + '\n' +
+    #             '  has an instance variable  capacity  with this value:\n' +
+    #             '     capacity: ' + str(cloud.capacity) +
+    #             '  That value should be a STRING, but is isn\'t.\n')
+    #         print_failure_message()
+    #         print_failure_message(explanation)
+    #         return False
+    #
+    #     if not isinstance(cloud.water, list):
+    #         explanation = (
+    #             '  This object:\n' +
+    #             '     ' + str(cloud) + '\n' +
+    #             '  has an instance variable  water  with this value:\n' +
+    #             '     water: ' + str(cloud.water) +
+    #             '  That value should be a LIST, but is isn\'t.\n')
+    #         print_failure_message()
+    #         print_failure_message(explanation)
+    #         return False
+    #
+    #     if not is_list_of_strings(cloud.water):
+    #         explanation = (
+    #             '  This object:\n' +
+    #             '     ' + str(cloud) + '\n' +
+    #             '  has an instance variable  water  with this value:\n' +
+    #             '     water: ' + str(cloud.water) +
+    #             '  That value should be a list of STRINGS, but is isn\'t.\n')
+    #         print_failure_message()
+    #         print_failure_message(explanation)
+    #         return False
 
     return True
 
@@ -507,10 +529,10 @@ def print_result_of_test(expected, actual):
 
     if isinstance(expected, list) or isinstance(expected, tuple):
         explanation = (
-            '  For at least one of the above, its Expected value\n' +
-            '  does not equal its Actual value.')
-#          Note: the printed\n' +
-#             '  values are the actual values ROUNDED to 1 decimal place.')
+                '  For at least one of the above, its Expected value\n' +
+                '  does not equal its Actual value.')
+        #          Note: the printed\n' +
+        #             '  values are the actual values ROUNDED to 1 decimal place.')
         print_failure_message(explanation)
 
     return False
