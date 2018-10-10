@@ -45,6 +45,11 @@ class Cloud(object):
     """
 
     def __init__(self, capacity, water):
+        self.capacity = capacity
+        self.water = water
+        if self.water > self.capacity:
+            self.water = self.capacity
+        self.water2 = water
 
         """
         What comes in:
@@ -82,6 +87,12 @@ class Cloud(object):
         # ---------------------------------------------------------------------
 
     def rain(self, rain_amount):
+        if rain_amount > self.water:
+            rain_amount = self.water
+            self.water = 0
+        else:
+            self.water = self.water - rain_amount
+        return rain_amount
 
     """
         What comes in:
@@ -130,6 +141,8 @@ class Cloud(object):
     # ---------------------------------------------------------------------
 
     def get_total_rain_amount(self):
+        rain = self.water2 - self.water
+        return rain
 
     """
         What comes in:
@@ -165,6 +178,10 @@ class Cloud(object):
     # ---------------------------------------------------------------------
 
     def merge_cloud(self, another_cloud):
+        self.water = self.water + another_cloud.water
+        another_cloud.water = 0
+        self.capacity = self.capacity + another_cloud.capacity
+        another_cloud.capacity = 0
 
         """
         What comes in:
