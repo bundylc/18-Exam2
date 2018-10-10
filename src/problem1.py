@@ -183,10 +183,7 @@ def run_test_problem1a():
 
 
 def problem1a(strings):
-    mylist = []
-    for k in range(len(strings)):
-        mylist.append(len(strings[k]))
-    return mylist
+
 
     """
     What comes in:
@@ -357,12 +354,6 @@ def run_test_problem1b():
 
 
 def problem1b(strings):
-    count = 0
-    for k in range(len(strings)):
-        prime = is_prime(len(strings[k]))
-        if prime is True:
-            count = count + 1
-    return count
 
     """
     What comes in:
@@ -556,16 +547,6 @@ def run_test_problem1c():
 # (including possibly your own functions) appropriately, else NO credit for it.
 # -----------------------------------------------------------------------------
 def problem1c(strings):
-    count = 0
-    for k in range(len(strings)):
-        prime = is_prime(len(strings[k]))
-        if prime is True:
-            count = count + 1
-    prime2 = is_prime(count)
-    if prime2 is True:
-        return True
-    else:
-        return False
 
     """
     What comes in:
@@ -761,12 +742,6 @@ def run_test_problem1d():
 
 
 def problem1d(strings):
-    for k in range(len(strings)):
-        prime = is_prime(len(strings[k]))
-        if prime is True:
-            return strings[k]
-    return -1
-
 
 
     """
