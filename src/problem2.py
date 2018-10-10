@@ -181,7 +181,11 @@ def run_test_problem2a():
 
 
 def problem2a(triangle):
-
+    sidea = triangle.a
+    sideb = triangle.b
+    sidec = triangle.c
+    triangle2 = Triangle(2*sidea, 2*sideb, 2*sidec)
+    return triangle2
 
     """
     What comes in:  a Triangle
@@ -336,6 +340,12 @@ def run_test_problem2b():
 # of the Triangle class (at the top of this file) for a useful method.
 # -----------------------------------------------------------------------------
 def problem2b(triangles):
+    area = 0
+    for k in range(len(triangles)):
+        area1 = triangles[k].get_area()
+        area = area + area1
+    return area
+
 
     """
     What comes in:  a sequence of Triangle objects (which could be empty)
